@@ -1,0 +1,58 @@
+<form [formGroup]="userForm" class="mb-3 ">
+    <div class="row">
+        <div class="form-group col-md-6 mb-2">
+            <label for="">Nome</label>
+
+            <input 
+                type="text"
+                name="nome"
+                id="nome"
+                formControlName="nome"
+                class="form-control is-invalid"
+                [class.is-invalid]="userForm.get('nome')?.errors && userForm.get('nome')?.touched ">
+
+              <div 
+                *ngIf="userForm.get('nome')?.hasError('required')" 
+                class="invalid-feedback">
+                the name field is mandatory
+              </div>
+
+              <div 
+              *ngIf="userForm.get('nome')?.hasError('maxlength')"
+               class="invalid-feedback">
+               The name field must have a maximum of 250 characters
+              </div>
+              
+            </div>
+
+
+        <div class="form-group col-md-3 mb-2">
+            <label for="">Idade</label>
+            <input 
+             name="idade"
+             id="idade"
+             type="number"
+             formControlName="idade"
+             class="form-control"
+             [class.is-invalid] = "userForm.get('idade')?.errors && userForm.get('idade')?.touched"
+             >
+             <div *ngIf="userForm.get('idade')?.hasError('required')" class="invalid-feedback">
+                the young field is mandatory
+              </div>
+              <div *ngIf="userForm.get('idade')?.hasError('min') || userForm.get('idade')?.hasError('max') " class="invalid-feedback">
+                the young value is 12 or 110
+              </div>
+        </div>
+    </div>
+    <button  [disabled]="!userForm.valid" (click)="SubmitForms()" class="btn btn-success mt-3">Include</button>
+</form>
+
+
+<div class="row">
+    <app-user-card 
+    class="col-md-3 mb-3" 
+    *ngFor="let usurario of usuarios" 
+    [user]="usurario"
+    (userInfoEmmitter)="InfoUserSelecionado($event)"
+    ></app-user-card>
+</div>

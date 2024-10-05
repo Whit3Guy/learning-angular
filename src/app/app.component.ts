@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'my_app';
+export class AppComponent 
+{
 }
